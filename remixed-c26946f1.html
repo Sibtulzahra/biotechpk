@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiotechFuture — Pakistan's Hub for Biotechnology Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy2: #132040;
+    --teal: #00B4A6;
+    --teal-light: #33C9BC;
+    --teal-dim: rgba(0,180,166,0.12);
+    --gold: #E8B84B;
+    --gold-light: #F5D27A;
+    --gold-dim: rgba(232,184,75,0.12);
+    --white: #FFFFFF;
+    --off-white: #F4F6FA;
+    --muted: #8B9AB5;
+    --border: rgba(255,255,255,0.08);
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.07);
+    --text: #D4DCEE;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  h1,h2,h3 { font-family: 'Playfair Display', serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(10,22,40,0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%; height: 68px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 22px;
+    color: var(--white); letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--teal); }
+  .logo small { font-family:'Inter',sans-serif; font-size:10px; color:var(--muted); display:block; letter-spacing:2px; font-weight:500; margin-top:-2px; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:13px; font-weight:500; color:var(--muted); transition:color 0.2s; letter-spacing:0.3px; }
+  .nav-links a:hover { color:var(--teal); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--teal), #00D4C4);
+    color: var(--navy); padding:9px 22px; border-radius:6px;
+    font-size:13px; font-weight:600; text-decoration:none;
+    transition:opacity 0.2s; letter-spacing:0.3px;
+  }
+  .nav-cta:hover { opacity:0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 6% 100px;
+    background: linear-gradient(160deg, #0A1628 0%, #0D1F3C 50%, #0A2240 100%);
+    position:relative; overflow:hidden;
+    display:flex; align-items:center;
+  }
+  .hero-bg-grid {
+    position:absolute; inset:0; pointer-events:none;
+    background-image: linear-gradient(rgba(0,180,166,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,180,166,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position:absolute; top:-200px; right:-200px;
+    width:700px; height:700px; border-radius:50%;
+    background: radial-gradient(circle, rgba(0,180,166,0.12) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .hero-glow2 {
+    position:absolute; bottom:-150px; left:-100px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(232,184,75,0.07) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .hero-content { position:relative; z-index:1; max-width:780px; }
+  .hero-eyebrow {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(0,180,166,0.1);
+    border: 1px solid rgba(0,180,166,0.25);
+    padding:7px 16px; border-radius:4px;
+    font-size:12px; color:var(--teal); font-weight:600;
+    letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:28px;
+  }
+  .hero-eyebrow::before {
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--teal); animation:blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 {
+    font-size: clamp(44px, 6.5vw, 88px);
+    font-weight:900; line-height:1.02;
+    letter-spacing:-2px; color:var(--white);
+    margin-bottom:28px;
+  }
+  .hero h1 .t { color:var(--teal); }
+  .hero h1 .g { color:var(--gold); }
+  .hero p { font-size:17px; color:var(--muted); max-width:540px; margin-bottom:44px; font-weight:300; line-height:1.75; }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:64px; }
+  .btn-primary {
+    background:linear-gradient(135deg,var(--teal),#00D4C4);
+    color:var(--navy); padding:14px 30px; border-radius:6px;
+    font-size:14px; font-weight:600; text-decoration:none;
+    transition:all 0.2s; letter-spacing:0.3px;
+  }
+  .btn-primary:hover { opacity:0.85; transform:translateY(-1px); }
+  .btn-outline {
+    background:transparent; color:var(--text);
+    padding:14px 30px; border-radius:6px;
+    font-size:14px; font-weight:500; text-decoration:none;
+    border:1px solid var(--border); transition:all 0.2s;
+  }
+  .btn-outline:hover { border-color:var(--teal); color:var(--teal); transform:translateY(-1px); }
+  .hero-stats { display:flex; gap:48px; flex-wrap:wrap; padding-top:40px; border-top:1px solid var(--border); }
+  .stat-num { font-family:'Playfair Display',serif; font-size:36px; font-weight:900; color:var(--white); line-height:1; }
+  .stat-accent { color:var(--teal); }
+  .stat-lbl { font-size:12px; color:var(--muted); letter-spacing:0.5px; margin-top:4px; }
+
+  /* COMMON SECTION */
+  section { padding:100px 6%; }
+  .sec-label {
+    font-size:11px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--teal);
+    margin-bottom:14px;
+  }
+  .sec-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(28px,4vw,46px); font-weight:900;
+    line-height:1.08; letter-spacing:-1px; color:var(--white);
+    max-width:640px; margin-bottom:16px;
+  }
+  .sec-sub { font-size:15px; color:var(--muted); max-width:560px; margin-bottom:56px; line-height:1.75; }
+  .gold-line { width:48px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:36px; }
+
+  /* UNIVERSITIES */
+  #universities { background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%); }
+  .uni-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap:20px;
+  }
+  .uni-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px; overflow:hidden;
+    transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .uni-card:hover {
+    transform:translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,180,166,0.2);
+    border-color:rgba(0,180,166,0.2);
+  }
+  .uni-img {
+    width:100%; height:160px; object-fit:cover;
+    filter:brightness(0.85) saturate(0.9);
+    transition:filter 0.3s;
+    background: var(--navy2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:42px;
+    position:relative;
+  }
+  .uni-card:hover .uni-img { filter:brightness(1) saturate(1); }
+  .uni-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .uni-img-placeholder {
+    width:100%; height:160px;
+    background:linear-gradient(135deg, var(--navy2), #0D2550);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px;
+  }
+  .uni-img-placeholder .icon { font-size:36px; }
+  .uni-img-placeholder .abbr { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--teal); }
+  .uni-badge-strip {
+    position:absolute; top:10px; right:10px;
+  }
+  .uni-type-badge {
+    font-size:10px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; padding:4px 10px; border-radius:4px;
+  }
+  .pub { background:rgba(0,180,166,0.2); color:var(--teal); }
+  .priv { background:rgba(232,184,75,0.2); color:var(--gold); }
+  .uni-body { padding:20px; }
+  .uni-rank-num { font-family:'Playfair Display',serif; font-size:11px; color:var(--muted); letter-spacing:2px; margin-bottom:6px; }
+  .uni-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--white); margin-bottom:4px; line-height:1.3; }
+  .uni-loc { font-size:12px; color:var(--muted); margin-bottom:12px; }
+  .uni-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .utag { font-size:10px; font-weight:600; padding:3px 8px; border-radius:4px; background:rgba(255,255,255,0.06); color:var(--muted); letter-spacing:0.3px; }
+
+  /* LAB SKILLS */
+  #labs { background: #0D1F3C; }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:24px;
+    transition:border-color 0.2s, background 0.2s;
+  }
+  .skill-card:hover { border-color:rgba(0,180,166,0.3); background:var(--card-hover); }
+  .sk-icon { font-size:28px; margin-bottom:14px; }
+  .sk-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--white); margin-bottom:12px; }
+  .sk-list { list-style:none; }
+  .sk-list li { font-size:13px; color:var(--muted); padding:5px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:7px; }
+  .sk-list li::before { content:'›'; color:var(--teal); font-size:14px; font-weight:700; }
+  .sk-list li:last-child { border-bottom:none; }
+
+  /* COMPANIES */
+  #companies { background: var(--navy); }
+  .sec-sub-head { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--gold); margin-bottom:20px; }
+  .comp-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:16px; margin-bottom:44px; }
+  .comp-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:22px 24px;
+    transition:transform 0.2s, border-color 0.2s;
+  }
+  .comp-card:hover { transform:translateY(-3px); border-color:rgba(232,184,75,0.2); }
+  .comp-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; }
+  .comp-name { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--white); }
+  .comp-city { font-size:12px; color:var(--muted); margin-bottom:10px; }
+  .comp-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px; }
+  .comp-roles { display:flex; flex-wrap:wrap; gap:6px; }
+  .rtag { font-size:11px; padding:3px 8px; border-radius:4px; background:rgba(255,255,255,0.05); color:var(--muted); }
+  .badge-pub2 { background:rgba(0,180,166,0.15); color:var(--teal); font-size:10px; font-weight:700; padding:3px 9px; border-radius:4px; letter-spacing:0.5px; white-space:nowrap; }
+  .badge-priv2 { background:rgba(232,184,75,0.15); color:var(--gold); font-size:10px; font-weight:700; padding:3px 9px; border-radius:4px; letter-spacing:0.5px; white-space:nowrap; }
+
+  /* TIPS */
+  #tips { background:#0D1F3C; }
+  .tips-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; }
+  .tip-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:28px;
+    border-left:3px solid var(--gold);
+    transition:border-color 0.2s;
+  }
+  .tip-card:hover { border-left-color:var(--teal); }
+  .tip-n { font-family:'Playfair Display',serif; font-size:42px; font-weight:900; color:rgba(232,184,75,0.15); line-height:1; margin-bottom:10px; }
+  .tip-title { font-size:15px; font-weight:600; color:var(--white); margin-bottom:8px; }
+  .tip-text { font-size:13px; color:var(--muted); line-height:1.65; }
+
+  /* FOOTER */
+  footer { background:#060F1E; color:var(--muted); padding:60px 6% 28px; }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+  .footer-logo { font-family:'Playfair Display',serif; font-weight:900; font-size:20px; color:var(--white); margin-bottom:12px; }
+  .footer-logo span { color:var(--teal); }
+  .footer-brand p { font-size:13px; line-height:1.7; max-width:280px; }
+  .footer-brand .site-url { font-size:12px; color:var(--teal); margin-top:12px; font-weight:600; letter-spacing:0.5px; }
+  .footer-col h4 { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--white); margin-bottom:16px; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:9px; }
+  .footer-col ul a { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .footer-col ul a:hover { color:var(--teal); }
+  .footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .footer-bottom p { font-size:12px; }
+  .footer-bottom .url-tag { color:var(--gold); font-weight:600; font-size:13px; }
+
+  @media (max-width:768px) {
+    nav { padding:0 4%; }
+    .nav-links { display:none; }
+    .hero { padding:110px 4% 80px; }
+    .hero-stats { gap:24px; }
+    section { padding:70px 4%; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    Biotech<span>Future</span>
+    <small>www.biotechfuture.com</small>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#universities">Universities</a></li>
+    <li><a href="#labs">Lab Skills</a></li>
+    <li><a href="#companies">Companies</a></li>
+    <li><a href="#tips">Career Tips</a></li>
+  </ul>
+  <a href="#universities" class="nav-cta">Explore →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">For Biotech Students in Pakistan 🇵🇰</div>
+    <h1>Build Your<br><span class="t">Biotech</span><br><span class="g">Future</span> Here</h1>
+    <p>Pakistan's most complete guide to biotechnology universities, lab skills, and industry careers — curated for students who want to go further.</p>
+    <div class="hero-btns">
+      <a href="#universities" class="btn-primary">View Universities</a>
+      <a href="#companies" class="btn-outline">Find Jobs & Internships</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">30<span class="stat-accent">+</span></div>
+        <div class="stat-lbl">Universities with Biotech Degrees</div>
+      </div>
+      <div>
+        <div class="stat-num">50<span class="stat-accent">+</span></div>
+        <div class="stat-lbl">Companies Hiring Graduates</div>
+      </div>
+      <div>
+        <div class="stat-num">10<span class="stat-accent">+</span></div>
+        <div class="stat-lbl">Core Lab Skill Areas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITIES -->
+<section id="universities">
+  <div class="sec-label">Higher Education</div>
+  <h2 class="sec-title">Universities Offering Biotechnology Degrees</h2>
+  <p class="sec-sub">Accredited BS, MS, and PhD programs across Pakistan — ranked by program strength and research output.</p>
+  <div class="gold-line"></div>
+
+  <div class="uni-grid">
+
+    <!-- PU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0D2550,#112A60);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/University_of_Punjab_Lahore.jpg/640px-University_of_Punjab_Lahore.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="University of Punjab">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🏛️</span><span class="abbr">PU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 01</div>
+        <div class="uni-name">University of the Punjab</div>
+        <div class="uni-loc">📍 Lahore, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">MS</span><span class="utag">PhD</span><span class="utag">Research Labs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QAU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0A2240,#0D2850);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Quaid-i-Azam_University_Entrance.JPG/640px-Quaid-i-Azam_University_Entrance.JPG"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="QAU">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🏫</span><span class="abbr">QAU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 02</div>
+        <div class="uni-name">Quaid-i-Azam University</div>
+        <div class="uni-loc">📍 Islamabad, Federal Capital</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">MS</span><span class="utag">PhD</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMSATS -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0E1E3A,#102044);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/COMSATS_University_Islamabad_%28CUI%29.jpg/640px-COMSATS_University_Islamabad_%28CUI%29.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="COMSATS">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🔬</span><span class="abbr">CUI</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 03</div>
+        <div class="uni-name">COMSATS University Islamabad</div>
+        <div class="uni-loc">📍 Islamabad / Lahore / Abbottabad</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">MS Bioinformatics</span><span class="utag">Multi-Campus</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUST -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0B1F3E,#0E2448);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/NUST_Main_Entrance.jpg/640px-NUST_Main_Entrance.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="NUST">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🧬</span><span class="abbr">NUST</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 04</div>
+        <div class="uni-name">NUST — National University of Sciences & Technology</div>
+        <div class="uni-loc">📍 Islamabad, Federal Capital</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">Biomedical Engineering</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- UAF -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0C2040,#0F2550);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/University_of_Agriculture_Faisalabad.jpg/640px-University_of_Agriculture_Faisalabad.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="UAF">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🌱</span><span class="abbr">UAF</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 05</div>
+        <div class="uni-name">University of Agriculture Faisalabad</div>
+        <div class="uni-loc">📍 Faisalabad, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">Agricultural Biotech</span><span class="utag">Plant Genomics</span><span class="utag">MS/PhD</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IUB -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0D1E38,#112244);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/IUB_front_view.jpg/640px-IUB_front_view.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="IUB">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🏫</span><span class="abbr">IUB</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 06</div>
+        <div class="uni-name">Islamia University of Bahawalpur</div>
+        <div class="uni-loc">📍 Bahawalpur, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">Biochemistry</span><span class="utag">Microbiology</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0A1F3C,#0D2346);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/University_of_Karachi.jpg/640px-University_of_Karachi.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="KU">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🌊</span><span class="abbr">KU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 07</div>
+        <div class="uni-name">University of Karachi</div>
+        <div class="uni-loc">📍 Karachi, Sindh</div>
+        <div class="uni-tags">
+          <span class="utag">Marine Biotechnology</span><span class="utag">Microbial Genetics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BZU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0E2040,#12264C);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Bahauddin_Zakariya_University.jpg/640px-Bahauddin_Zakariya_University.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="BZU">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🏛️</span><span class="abbr">BZU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 08</div>
+        <div class="uni-name">Bahauddin Zakariya University</div>
+        <div class="uni-loc">📍 Multan, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">MS</span><span class="utag">Environmental Biotech</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AKU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#1A1020,#231435);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Aga_Khan_University_-_Stadium_Road_Campus.jpg/640px-Aga_Khan_University_-_Stadium_Road_Campus.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="AKU">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🏥</span><span class="abbr">AKU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge priv">Private</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 09</div>
+        <div class="uni-name">Aga Khan University</div>
+        <div class="uni-loc">📍 Karachi, Sindh</div>
+        <div class="uni-tags">
+          <span class="utag">Biomedical Sciences</span><span class="utag">Medical Research</span><span class="utag">International</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FCCU -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#1A1020,#211430);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Forman_Christian_College_University.jpg/640px-Forman_Christian_College_University.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="FCCU">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">⛪</span><span class="abbr">FCCU</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge priv">Private</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 10</div>
+        <div class="uni-name">Forman Christian College University</div>
+        <div class="uni-loc">📍 Lahore, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">Well-Equipped Labs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LUMS -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#1A1020,#231532);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/LUMS_Main_Building.jpg/640px-LUMS_Main_Building.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="LUMS">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🎓</span><span class="abbr">LUMS</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge priv">Private</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 11</div>
+        <div class="uni-name">LUMS — Lahore University of Management Sciences</div>
+        <div class="uni-loc">📍 Lahore, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">Genomics</span><span class="utag">Computational Biology</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- UOG -->
+    <div class="uni-card">
+      <div style="position:relative;">
+        <div class="uni-img-placeholder" style="background:linear-gradient(135deg,#0C1F3A,#0F2548);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/University_of_Gujrat_%28UOG%29.jpg/640px-University_of_Gujrat_%28UOG%29.jpg"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;" alt="UOG">
+          <div class="fallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;">
+            <span class="icon">🧪</span><span class="abbr">UOG</span>
+          </div>
+        </div>
+        <div class="uni-badge-strip"><span class="uni-type-badge pub">Public</span></div>
+      </div>
+      <div class="uni-body">
+        <div class="uni-rank-num">RANK 12</div>
+        <div class="uni-name">University of Gujrat</div>
+        <div class="uni-loc">📍 Gujrat, Punjab</div>
+        <div class="uni-tags">
+          <span class="utag">BS Biotechnology</span><span class="utag">Bioinformatics</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:16px;">
+    Campus images sourced from Wikimedia Commons under Creative Commons licenses. Images load from Wikipedia servers; fallback icons shown if unavailable.
+  </p>
+</section>
+
+<!-- LAB SKILLS -->
+<section id="labs">
+  <div class="sec-label">Practical Training</div>
+  <h2 class="sec-title">Essential Lab Skills for Biotech Students</h2>
+  <p class="sec-sub">Master these core techniques to become job-ready and competitive in Pakistan's growing biotech industry.</p>
+  <div class="gold-line"></div>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="sk-icon">🧬</div><div class="sk-title">Molecular Biology</div><ul class="sk-list"><li>PCR & RT-PCR</li><li>Gel Electrophoresis</li><li>DNA Extraction & Purification</li><li>Southern / Northern Blotting</li><li>Cloning & Transformation</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">🔬</div><div class="sk-title">Microbiology</div><ul class="sk-list"><li>Aseptic Technique</li><li>Culture & Staining</li><li>Antibiotic Sensitivity Testing</li><li>Fermentation Basics</li><li>Microscopy (Light/Electron)</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">🧪</div><div class="sk-title">Biochemistry Lab</div><ul class="sk-list"><li>Enzyme Assays</li><li>Protein Extraction & SDS-PAGE</li><li>Western Blotting</li><li>Spectrophotometry</li><li>Chromatography (HPLC, TLC)</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">🌱</div><div class="sk-title">Plant Biotechnology</div><ul class="sk-list"><li>Tissue Culture & Callus Induction</li><li>Agrobacterium-Mediated Transfer</li><li>Transgenic Plant Analysis</li><li>Phytohormone Application</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">💻</div><div class="sk-title">Bioinformatics</div><ul class="sk-list"><li>NCBI / BLAST Database Use</li><li>Sequence Alignment (MEGA)</li><li>Python — Biopython</li><li>Phylogenetic Tree Building</li><li>Protein Structure (SWISS-MODEL)</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">🩺</div><div class="sk-title">Medical / Clinical</div><ul class="sk-list"><li>ELISA (Immunoassay)</li><li>Flow Cytometry Basics</li><li>Cell Culture & Passaging</li><li>Biosafety Level Protocols</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">⚗️</div><div class="sk-title">Industrial Biotech</div><ul class="sk-list"><li>Bioreactor Operation</li><li>Downstream Processing</li><li>GMP / GLP Compliance</li><li>Quality Control Testing</li></ul></div>
+    <div class="skill-card"><div class="sk-icon">📊</div><div class="sk-title">Research & Data</div><ul class="sk-list"><li>Statistical Analysis (SPSS, R)</li><li>Scientific Writing</li><li>Lab Notebook Documentation</li><li>Ethics & Biosafety Regulations</li></ul></div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies">
+  <div class="sec-label">Industry Opportunities</div>
+  <h2 class="sec-title">Public & Private Companies Hiring Biotech Graduates</h2>
+  <p class="sec-sub">From pharmaceutical giants to agri-biotech startups — Pakistan's industry needs skilled graduates like you.</p>
+  <div class="gold-line"></div>
+
+  <div class="sec-sub-head">🏛️ Public Sector Organizations</div>
+  <div class="comp-grid">
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">PARC</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Islamabad — Nationwide</div><div class="comp-desc">Premier research body for agricultural biotechnology, crop improvement, and genetic resource conservation.</div><div class="comp-roles"><span class="rtag">Research Associate</span><span class="rtag">Lab Technician</span><span class="rtag">Scientist BS-17</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">NIBGE</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Faisalabad, Punjab</div><div class="comp-desc">Pakistan's flagship biotech research institute under PAEC. World-class labs in genomics, cotton biotech, and bioenergy.</div><div class="comp-roles"><span class="rtag">Research Officer</span><span class="rtag">PhD Fellow</span><span class="rtag">Lab Manager</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">PCSIR</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Lahore / Karachi / Peshawar</div><div class="comp-desc">Industrial biotechnology, food science, and material science research and commercialization for national development.</div><div class="comp-roles"><span class="rtag">Research Scientist</span><span class="rtag">Industrial Analyst</span><span class="rtag">QC Specialist</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">DRAP</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Islamabad</div><div class="comp-desc">Regulatory body overseeing pharmaceutical and biotech product approvals, quality, and biosafety compliance.</div><div class="comp-roles"><span class="rtag">Regulatory Affairs Officer</span><span class="rtag">Drug Inspector</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">National Institute of Health (NIH)</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Islamabad</div><div class="comp-desc">Epidemiology, vaccine development, public health diagnostics, and disease surveillance at national scale.</div><div class="comp-roles"><span class="rtag">Medical Lab Technologist</span><span class="rtag">Research Intern</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">Livestock & Dairy Development Board</div><span class="badge-pub2">PUBLIC</span></div><div class="comp-city">📍 Punjab / Sindh Provinces</div><div class="comp-desc">Animal biotechnology, embryo transfer, disease diagnostics, and livestock genetic improvement programs.</div><div class="comp-roles"><span class="rtag">Animal Biotech Officer</span><span class="rtag">Field Scientist</span></div></div>
+  </div>
+
+  <div class="sec-sub-head">🏢 Private Sector Companies</div>
+  <div class="comp-grid">
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">Ferozsons Laboratories</div><span class="badge-priv2">PRIVATE</span></div><div class="comp-city">📍 Lahore, Punjab</div><div class="comp-desc">One of Pakistan's leading pharmaceutical companies with a strong biologics and biotech drug pipeline.</div><div class="comp-roles"><span class="rtag">Production Associate</span><span class="rtag">QA/QC Analyst</span><span class="rtag">R&D Intern</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">Getz Pharma</div><span class="badge-priv2">PRIVATE</span></div><div class="comp-city">📍 Karachi, Sindh</div><div class="comp-desc">Largest Pakistani-owned pharma; active in generics, biosimilars, and vaccine partnerships with international firms.</div><div class="comp-roles"><span class="rtag">Regulatory Affairs</span><span class="rtag">Lab Scientist</span></div></div>
+    <div class="comp-card"><div class="comp-top"><div class="comp-name">Highnoon Laboratories</div><span class="badge-priv2">PRIVATE</span></div><div class="comp-city">📍 Lahore, Punjab</div><div class="comp-desc">Fast
